@@ -56,8 +56,8 @@ The command will now run at startup. You can create additional crontab commands 
 An easy way to run at startup is to create a .bat or .cmd file which executes the dynamic DNS command(s), and then placing that file into Windows's startup folder. A sample .bat file might look like this (Python requires forward slashes, not backslashes in the Windows environment):
 ```
 @echo off
-python C:/Users/Alice/Documents/porkbun-dynamic-dns-python/porkbun-ddns.py C:/Users/Alice/Documents/porkbun-dynamic-dns-python/ example.com
-python C:/Users/Alice/Documents/porkbun-dynamic-dns-python/porkbun-ddns.py C:/Users/Alice/Documents/porkbun-dynamic-dns-python/ example.com www
+python C:/Users/Alice/Documents/porkbun-dynamic-dns-python/porkbun-ddns.py C:/Users/Alice/Documents/porkbun-dynamic-dns-python/config.json example.com
+python C:/Users/Alice/Documents/porkbun-dynamic-dns-python/porkbun-ddns.py C:/Users/Alice/Documents/porkbun-dynamic-dns-python/config.json example.com www
 ```
 You can then save the above .bat file and place it into the Startup folder. Windows 10's default shared Startup folder is located in the following location:
 C:\ProgramData\Microsoft\Windows\Start Menu\Programs\StartUp
