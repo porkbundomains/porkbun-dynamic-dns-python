@@ -7,8 +7,10 @@ Installation:
  1. Install Python if it's not already installed. This client is Python 2-compatible so it should run out of the box on MacOS and many Linux distributions. If you're running Windows, you should download the most recent production Python version.
  2. Download and uncompress porkbun-dynamic-dns-python to the folder of your choice
  3. Install the *requests* library:
- 	`pip install requests`
+ 	`pip install requests`*
  4. Rename config.json.example to config.json and paste in your generated API and Secret keys. Save the config file. If you haven't yet generated the keys, check out our [Getting Started Guide.](https://kb.porkbun.com/article/190-getting-started-with-the-porkbun-dns-api)
+
+* If running the DDNS client on MacOS with the default Python 2.7, run `ensurepip --upgrade --user` first then run `pip install requests --user`
  
 ## Running the client
 
