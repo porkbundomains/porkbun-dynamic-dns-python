@@ -52,8 +52,7 @@ if len(sys.argv)>2: #at least the config and root domain is specified
 		myIP=sys.argv[5]
 	else:
 		myIP=getMyIP() #otherwise use the detected exterior IP address
-
- 	deleteRecord()
+	deleteRecord()
 
 	if getRecords(fqdn)["status"]=="ERROR":
 		print(createRecord()["status"])
