@@ -41,8 +41,9 @@ def get_records(args):
 
 
 def delete_record(args):
+    type_ = "A" if args.public_ip.version == 4 else "AAAA"
     for i in get_records(args)["records"]:
-        if i["name"] == args.fqdn and i["type"] in ["A", "AAAA", "ALIAS", "CNAME"]:
+        if i["name"] == args.fqdn and i["type"] in [type_, "ALIAS", "CNAME"]:
             print("Deleting existing {}-Record: {}".format(i["type"], i))
             api(args, "/dns/delete/" + args.domain + "/" + i["id"])
 
