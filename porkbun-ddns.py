@@ -30,10 +30,10 @@ def createRecord():
 
 if len(sys.argv)>2: #at least the config and root domain is specified
 	apiConfig = json.load(open(sys.argv[1])) #load the config file into a variable
-	rootDomain=sys.argv[2]	
+	rootDomain=sys.argv[2].lower()
 		
 	if len(sys.argv)>3 and sys.argv[3]!='-i': #check if a subdomain was specified as the third argument
-		subDomain=sys.argv[3]
+		subDomain=sys.argv[3].lower()
 		fqdn=subDomain + "." + rootDomain
 	else:
 		subDomain=''
