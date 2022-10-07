@@ -51,7 +51,7 @@ def delete_record(args):
 def create_record(args):
     obj = args.cfg.copy()
     type_ = "A" if args.public_ip.version == 4 else "AAAA"
-    obj.update({"name": args.subdomain, "type": type_, "content": args.public_ip.exploded, "ttl": 300})
+    obj.update({"name": args.subdomain.lower(), "type": type_, "content": args.public_ip.exploded, "ttl": 300})
     print("Creating {}-Record for '{}' with answer of '{}'".format(type_, args.fqdn, args.public_ip))
     return api(args, "/dns/create/" + args.domain, obj)
 
@@ -70,8 +70,8 @@ def main(args):
     )
     args = parser.parse_args()
 
-    args.domain, args.config = args.domain[0], args.config[0]
-    args.fqdn = "{}.{}".format(args.subdomain, args.domain).strip(".")
+    args.domain, args.config = args.domain[0].lower(), args.config[0]
+    args.fqdn = "{}.{}".format(args.subdomain.lower(), args.domain).strip(".")
 
     try:
         with sys.stdin if args.config == "-" else open(args.config) as file_:
