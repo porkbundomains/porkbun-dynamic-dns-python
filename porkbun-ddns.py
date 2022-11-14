@@ -17,8 +17,12 @@ def getMyIP():
 def deleteRecord():
 	for i in getRecords(rootDomain)["records"]:
 		if i["name"]==fqdn and (i["type"] == 'A' or i["type"] == 'ALIAS' or i["type"] == 'CNAME'):
-			print("Deleting existing " + i["type"] + " Record")
-			deleteRecord = json.loads(requests.post(apiConfig["endpoint"] + '/dns/delete/' + rootDomain + '/' + i["id"], data = json.dumps(apiConfig)).text)
+			if i["content"] != myIP: # Only delete the record if the current value does not equal the public or provided IP
+				print("Deleting existing " + i["type"] + " Record")
+				deleteRecord = json.loads(requests.post(apiConfig["endpoint"] + '/dns/delete/' + rootDomain + '/' + i["id"], data = json.dumps(apiConfig)).text)
+			else:
+				print("Record matches your IP, doing nothing.")
+				return "noDelete" 
 
 def createRecord():
 	createObj=apiConfig.copy()
@@ -46,8 +50,9 @@ if len(sys.argv)>2: #at least the config and root domain is specified
 	else:
 		myIP=getMyIP() #otherwise use the detected exterior IP address
 	
-	deleteRecord()
-	print(createRecord()["status"])
+	deleteStatus = deleteRecord()
+	if deleteStatus != "noDelete":
+		print(createRecord()["status"])
 	
 else:
 	print("Porkbun Dynamic DNS client, Python Edition\n\nError: not enough arguments. Examples:\npython porkbun-ddns.py /path/to/config.json example.com\npython porkbun-ddns.py /path/to/config.json example.com www\npython porkbun-ddns.py /path/to/config.json example.com '*'\npython porkbun-ddns.py /path/to/config.json example.com -i 10.0.0.1\n")
