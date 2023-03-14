@@ -1,4 +1,6 @@
-# porkbun-dynamic-dns-python
+# porkbun-dynamic-dns-python [deprecated]
+
+Please note, this module is now in deprecated status. It is provided as-is as an example of how to use the Porkbun API manage DNS records, but is no longer maintained.
 
 Our minimalist dynamic DNS client. Compatible with both Python 2 or 3 so it runs on MacOS without any additional software to install, or any other platform that supports Python.
 
